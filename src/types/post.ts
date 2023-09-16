@@ -18,4 +18,6 @@ export type PostObject = {
   category: CategoryObject;
   isMainPost: boolean;
   replies: number;
+
+  anonCount: number; // # Increments the annonymous count such that anon_{anonCount} is the anon name
 };
