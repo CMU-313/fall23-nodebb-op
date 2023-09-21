@@ -28,7 +28,7 @@ module.exports = function (Posts) {
             userData.selectedGroups = [];
 
             if (meta.config.hideFullname) {
-                userData.fullname = undefined;
+                userData.fullname = "Anonymous";
             }
         });
 

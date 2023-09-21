@@ -118,8 +118,8 @@ module.exports = function (User) {
             const user = uidToUser[uid] || { ...User.guestData };
             if (!parseInt(user.uid, 10)) {
                 user.username = (user.hasOwnProperty('oldUid') && parseInt(user.oldUid, 10)) ? '[[global:former_user]]' : '[[global:guest]]';
-                user.displayname = user.username;
             }
+            user.displayname = 'Anonymous Posting Name'; // Post displayname
 
             return user;
         });

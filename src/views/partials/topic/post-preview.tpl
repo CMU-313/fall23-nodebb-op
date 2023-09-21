@@ -4,6 +4,7 @@
             <a href="{{{ if post.user.userslug }}}{config.relative_path}/user/{post.user.userslug}{{{ else }}}#{{{ end }}}">
                 {buildAvatar(post.user, "sm", true, "", "user/picture")} {post.user.username}
             </a>
+           
         </div>
         <small class="pull-right">
             <span class="timeago" title="{post.timestampISO}"></span>

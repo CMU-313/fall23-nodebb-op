@@ -19,6 +19,12 @@
                 </span>
             </h1>
 
+                        
+            <!-- "Hide Name" Button -->
+            <!-- "Hide Name" Button inside specific post-->
+            <!-- button class="btn btn-default" id="hideNameButton">Hide Name</button -->
+
+
             <div class="topic-info clearfix">
                 <div class="category-item inline-block">
                     <div role="presentation" class="icon pull-left" style="{function.generateCategoryBackground, category}">
