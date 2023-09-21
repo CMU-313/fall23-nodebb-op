@@ -18,8 +18,6 @@ const intFields = [
     'blocksCount', 'passwordExpiry', 'mutedUntil',
 ];
 
-// const AnonymousNames = ['Anon1', 'Anon2', 'Anon3'];
-
 module.exports = function (User) {
     const fieldWhitelist = [
         'uid', 'username', 'userslug', 'email', 'email:confirmed', 'joindate', 'accounttype',
@@ -35,7 +33,7 @@ module.exports = function (User) {
         username: '[[global:guest]]', // @use-this-to-tag
         displayname: '[[global:guest]]', // Post Author
         userslug: '',
-        fullname: '[[global:guest]]', //
+        fullname: '[[global:guest]]', // full-name of user
         email: '',
         'icon:text': '?',
         'icon:bgColor': '#aaa',
