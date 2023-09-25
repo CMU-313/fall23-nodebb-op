@@ -123,11 +123,11 @@ module.exports = function (User) {
                 // user.displayname = user.username;
             }
 
-            // NEED TO SET is annoymous to true
-            if (user.is_anonymous) {
-                user.displayname = 'FAKE';
-                // print('user.displayname', user.displayname);
-            }
+            // [Trying to use annoymous_flag to update displaynames
+            // if (user.is_anonymous) {
+            //     user.displayname = 'FAKE';
+            //     // print('user.displayname', user.displayname);
+            // }
 
             return user;
         });
