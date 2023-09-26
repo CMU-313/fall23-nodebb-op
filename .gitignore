@@ -82,3 +82,6 @@ theme/*.sublime-workspace
 theme/.idea
 theme/.vscode
 theme/node_modules/
+!theme/node_modules/nodebb-plugin-composer-default
+
+!fall23-nodebb-op/node_modules/nodebb-plugin-composer-default
