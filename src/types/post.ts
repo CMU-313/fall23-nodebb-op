@@ -19,5 +19,7 @@ export type PostObject = {
   isMainPost: boolean;
   replies: number;
 
+  anon?: string,
+  isAnon?: boolean;
   anonCount: number; // # Increments the annonymous count such that anon_{anonCount} is the anon name
 };

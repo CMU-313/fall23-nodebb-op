@@ -88,16 +88,16 @@ define('composer', [
 
 			if (!isMobile && window.location.pathname.startsWith(config.relative_path + '/compose')) {
 				/*
-				 *If this conditional is met, we're no longer in mobile/tablet
-				 *resolution but we've somehow managed to have a mobile
-				 *composer load, so let's go back to the topic
-				 */
+                 *    If this conditional is met, we're no longer in mobile/tablet
+                 *    resolution but we've somehow managed to have a mobile
+                 *    composer load, so let's go back to the topic
+                 */
 				history.back();
 			} else if (isMobile && !window.location.pathname.startsWith(config.relative_path + '/compose')) {
 				/*
-				 *In this case, we're in mobile/tablet resolution but the composer
-				 *that loaded was a regular composer, so let's fix the address bar
-				 */
+                 *    In this case, we're in mobile/tablet resolution but the composer
+                 *    that loaded was a regular composer, so let's fix the address bar
+                 */
 				mobileHistoryAppend();
 			}
 		}
@@ -307,9 +307,9 @@ define('composer', [
 
 	composer.enhance = function (postContainer, post_uuid, postData) {
 		/*
-			This method enhances a composer container with client-side sugar (preview, etc)
-			Everything in here also applies to the /compose route
-		*/
+            This method enhances a composer container with client-side sugar (preview, etc)
+            Everything in here also applies to the /compose route
+        */
 
 		if (!post_uuid && !postData) {
 			post_uuid = utils.generateUUID();
@@ -342,11 +342,14 @@ define('composer', [
 
 		submitBtn.on('click', function (e) {
 			e.preventDefault();
-			e.stopPropagation();// Other click events bring composer back to active state which is undesired on submit
-
+			e.stopPropagation();
+			if ($('#post_as_anon').is(':checked')) {
+				console.log('Anon checkbox is checked');
+			}
 			$(this).attr('disabled', true);
 			post(post_uuid);
 		});
+
 
 		require(['mousetrap'], function (mousetrap) {
 			mousetrap(postContainer.get(0)).bind('mod+enter', function () {
@@ -455,9 +458,9 @@ define('composer', [
 			isTopic: isTopic,
 			isEditing: isEditing,
 			canSchedule: !!(isMain && privileges &&
-				((privileges['topics:schedule'] && !isEditing) || (isScheduled && privileges.view_scheduled))),
+                ((privileges['topics:schedule'] && !isEditing) || (isScheduled && privileges.view_scheduled))),
 			showHandleInput: config.allowGuestHandles &&
-				(app.user.uid === 0 || (isEditing && isGuestPost && app.user.isAdmin)),
+                (app.user.uid === 0 || (isEditing && isGuestPost && app.user.isAdmin)),
 			handle: postData ? postData.handle || '' : undefined,
 			formatting: composer.formatting,
 			tagWhitelist: postData.category ? postData.category.tagWhitelist : ajaxify.data.tagWhitelist,
@@ -466,8 +469,8 @@ define('composer', [
 			submitOptions: [
 				// Add items using `filter:composer.create`, or just add them to the <ul> in DOM
 				// {
-				// action: 'foobar',
-				// text: 'Text Label',
+				//     action: 'foobar',
+				//     text: 'Text Label',
 				// }
 			],
 		};
@@ -504,12 +507,11 @@ define('composer', [
 			resize.reposition(postContainer);
 			composer.enhance(postContainer, post_uuid, postData);
 			/*
-				Everything after this line is applied to the resizable composer only
-				Want something done to both resizable composer and the one in /compose?
-				Put it in composer.enhance().
-
-				Eventually, stuff after this line should be moved into composer.enhance().
-			*/
+                Everything after this line is applied to the resizable composer only
+                Want something done to both resizable composer and the one in /compose?
+                Put it in composer.enhance().
+                Eventually, stuff after this line should be moved into composer.enhance().
+            */
 
 			activate(post_uuid);
 
@@ -679,11 +681,20 @@ define('composer', [
 			return composerAlert(post_uuid, '[[error:scheduling-to-past]]');
 		}
 
+
+		var isAnon = false;
+
+		if ($('#post_as_anon').is(':checked')) {
+			console.log('The checkbox is checked');
+			isAnon = true;
+		}
+
 		let composerData = {
 			uuid: post_uuid,
 		};
 		let method = 'post';
 		let route = '';
+		console.log(action);
 
 		if (action === 'topics.post') {
 			route = '/topics';
@@ -696,6 +707,7 @@ define('composer', [
 				cid: categoryList.getSelectedCid(),
 				tags: tags.getTags(post_uuid),
 				timestamp: scheduler.getTimestamp(),
+				isanon: isAnon,
 			};
 		} else if (action === 'posts.reply') {
 			route = `/topics/${postData.tid}`;
@@ -705,6 +717,7 @@ define('composer', [
 				handle: handleEl ? handleEl.val() : undefined,
 				content: bodyEl.val(),
 				toPid: postData.toPid,
+				isanon: isAnon,
 			};
 		} else if (action === 'posts.edit') {
 			method = 'put';
@@ -718,6 +731,7 @@ define('composer', [
 				thumb: thumbEl.val() || '',
 				tags: tags.getTags(post_uuid),
 				timestamp: scheduler.getTimestamp(),
+				isanon: isAnon,
 			};
 		}
 		var submitHookData = {
@@ -764,8 +778,8 @@ define('composer', [
 					if (onComposeRoute || composer.bsEnvironment === 'xs' || composer.bsEnvironment === 'sm') {
 						window.history.back();
 					} else if (submitHookData.redirect &&
-						((ajaxify.data.template.name !== 'topic') ||
-						(ajaxify.data.template.topic && parseInt(postData.tid, 10) !== parseInt(ajaxify.data.tid, 10)))
+                        ((ajaxify.data.template.name !== 'topic') ||
+                        (ajaxify.data.template.topic && parseInt(postData.tid, 10) !== parseInt(ajaxify.data.tid, 10)))
 					) {
 						ajaxify.go('post/' + data.pid);
 					}
