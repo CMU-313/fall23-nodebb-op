@@ -2,6 +2,7 @@
 <label component="category/post" for="category-dropdown-check" class="btn btn-primary" id="new_topic" role="button">
     [[category:new_topic_button]]
 </label>
+<a href="{config.relative_path}/compose?cid={cid}&anonymous=true" component="category/post/anonymous" id="post_anonymous" class="btn btn-primary" data-ajaxify="false" role="button">[[category:post_anonymous_button]]</a>
 <noscript>
     <input type="checkbox" class="hidden" id="category-dropdown-check" aria-hidden="true">
     <ul component="category/list" class="dropdown-menu category-dropdown-menu" role="menu">
