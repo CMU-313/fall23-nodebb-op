@@ -93,7 +93,7 @@
         "multiparty": "4.2.3",
         "nconf": "0.12.0",
         "nodebb-plugin-2factor": "5.1.2",
-        "nodebb-plugin-composer-default": "git://github.com/yliang412/nodebb-plugin-composer-default#op-mod-v9.2.5",
+        "nodebb-plugin-composer-default": "git://github.com/yliang412/nodebb-plugin-composer-default#v9.x",
         "nodebb-plugin-dbsearch": "5.1.5",
         "nodebb-plugin-emoji": "4.0.6",
         "nodebb-plugin-emoji-android": "3.0.0",
