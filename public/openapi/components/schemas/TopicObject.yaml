@@ -184,6 +184,10 @@ TopicObject:
           description: "`pinExpiry` rendered as an ISO 8601 format"
         index:
           type: number
+        isAnon:
+          type: boolean
+        anonname:
+          type : string
       required:
         - tid
 TopicObjectSlim:
