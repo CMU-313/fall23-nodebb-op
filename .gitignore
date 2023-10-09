@@ -81,4 +81,3 @@ theme/*.sublime-project
 theme/*.sublime-workspace
 theme/.idea
 theme/.vscode
-theme/node_modules/
