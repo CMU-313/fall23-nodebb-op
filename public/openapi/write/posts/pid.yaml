@@ -66,8 +66,7 @@ get:
                     type: boolean
                   isAnon:
                     type: boolean
-                  anonname:
-                    type: string
+
 put:
   tags:
     - posts

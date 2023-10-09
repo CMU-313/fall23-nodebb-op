@@ -186,8 +186,7 @@ TopicObject:
           type: number
         isAnon:
           type: boolean
-        anonname:
-          type : string
+
       required:
         - tid
 TopicObjectSlim:

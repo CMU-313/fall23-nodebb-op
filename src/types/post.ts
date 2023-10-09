@@ -21,5 +21,4 @@ export type PostObject = {
 
   anonCount: number; // # Increments the annonymous count such that anon_{anonCount} is the anon name
   isAnon: boolean; // # If the post is anonymous
-  anonname : string | null; // # The anon name of the post
 };

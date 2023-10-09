@@ -25,7 +25,6 @@ export type UserObjectSlim = {
   banned_until_readable: string;
 
   is_anonymous: boolean; // New field
-  anonymous_name: string | null; // New field [ Can be dynamically changed based on Post.AnonCount]
 };
 
 export type UserObjectACP = UserObjectSlim & {
