@@ -12,6 +12,7 @@ const meta = require('../meta');
 const plugins = require('../plugins');
 const privileges = require('../privileges');
 
+// Defining functions for Posts
 module.exports = function (Posts) {
     Posts.getUserInfoForPosts = async function (uids, uid) {
         const [userData, userSettings, signatureUids] = await Promise.all([
@@ -24,11 +25,13 @@ module.exports = function (Posts) {
 
         userData.forEach((userData, index) => {
             userData.signature = validator.escape(String(userData.signature || ''));
+            // userData.username = 'THIS IS FAKE USERNAME';
+            // userData.fullname = userSettings[index].showfullname ? 'THIS IS FAKE NAME' : undefined;
             userData.fullname = userSettings[index].showfullname ? validator.escape(String(userData.fullname || '')) : undefined;
             userData.selectedGroups = [];
 
             if (meta.config.hideFullname) {
-                userData.fullname = undefined;
+                userData.fullname = 'Anonymous Name';
             }
         });
 

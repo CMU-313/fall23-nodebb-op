@@ -181,6 +181,7 @@ module.exports = function (Topics) {
         }
 
         data.ip = data.req ? data.req.ip : null;
+        console.log(data.isAnon);
         let postData = await posts.create(data);
         postData = await onNewPost(postData, data);
 

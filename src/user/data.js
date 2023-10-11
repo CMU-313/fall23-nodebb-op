@@ -30,10 +30,10 @@ module.exports = function (User) {
 
     User.guestData = {
         uid: 0,
-        username: '[[global:guest]]',
-        displayname: '[[global:guest]]',
+        username: '[[global:guest]]', // @use-this-to-tag
+        displayname: '[[global:guest]]', // Post Author
         userslug: '',
-        fullname: '[[global:guest]]',
+        fullname: '[[global:guest]]', // full-name of user
         email: '',
         'icon:text': '?',
         'icon:bgColor': '#aaa',
@@ -42,6 +42,7 @@ module.exports = function (User) {
         status: 'offline',
         reputation: 0,
         'email:confirmed': 0,
+        is_anonymous: true,
     };
 
     User.getUsersFields = async function (uids, fields) {
@@ -114,12 +115,19 @@ module.exports = function (User) {
 
     function uidsToUsers(uids, uniqueUids, usersData) {
         const uidToUser = _.zipObject(uniqueUids, usersData);
+        // TODO : store in db in the future
         const users = uids.map((uid) => {
             const user = uidToUser[uid] || { ...User.guestData };
             if (!parseInt(user.uid, 10)) {
                 user.username = (user.hasOwnProperty('oldUid') && parseInt(user.oldUid, 10)) ? '[[global:former_user]]' : '[[global:guest]]';
-                user.displayname = user.username;
+                // user.displayname = user.username;
             }
+
+            // [Trying to use annoymous_flag to update displaynames
+            // if (user.is_anonymous) {
+            //     user.displayname = 'FAKE';
+            //     // print('user.displayname', user.displayname);
+            // }
 
             return user;
         });
@@ -180,6 +188,7 @@ module.exports = function (User) {
         let uidToSettings = {};
         if (meta.config.showFullnameAsDisplayName) {
             const uids = users.map(user => user.uid);
+            // Maps uid to settings inside DB
             uidToSettings = _.zipObject(uids, await db.getObjectsFields(
                 uids.map(uid => `user:${uid}:settings`),
                 ['showfullname']
@@ -271,8 +280,10 @@ module.exports = function (User) {
         return await plugins.hooks.fire('filter:users.get', users);
     }
 
+    // TODO : add settings for annoymoity in uidToSettings
     function parseDisplayName(user, uidToSettings) {
         let showfullname = parseInt(meta.config.showfullname, 10) === 1;
+
         if (uidToSettings[user.uid]) {
             if (parseInt(uidToSettings[user.uid].showfullname, 10) === 0) {
                 showfullname = false;
@@ -281,11 +292,16 @@ module.exports = function (User) {
             }
         }
 
+        // user.displayname = 'fake displayname';
         user.displayname = validator.escape(String(
-            meta.config.showFullnameAsDisplayName && showfullname && user.fullname ?
-                user.fullname :
-                user.username
+            meta.config.showFullnameAsDisplayName && showfullname && user.fullname ? user.fullname : user.username
         ));
+
+        // NEED TO TOGGLE
+        if (user.is_anonymous) {
+            user.displayname = 'ANONYMOUS';
+            // print('user.displayname', user.displayname);
+        }
     }
 
     function parseGroupTitle(user) {

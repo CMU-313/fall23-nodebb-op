@@ -49,7 +49,6 @@ define('settings/object', function () {
             insertCb(append);
         }
     }
-
     const SettingsObject = {
         types: ['object'],
         use: function () {

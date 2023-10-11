@@ -23,6 +23,8 @@ export type UserObjectSlim = {
   lastonlineISO: string;
   banned_until: number;
   banned_until_readable: string;
+
+  is_anonymous: boolean; // New field
 };
 
 export type UserObjectACP = UserObjectSlim & {

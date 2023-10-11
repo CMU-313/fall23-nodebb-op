@@ -19,6 +19,7 @@ module.exports = function (Posts) {
         const content = data.content.toString();
         const timestamp = data.timestamp || Date.now();
         const isMain = data.isMain || false;
+        const isAnon = data.isAnon || false;
 
         if (!uid && parseInt(uid, 10) !== 0) {
             throw new Error('[[error:invalid-uid]]');
@@ -67,6 +68,7 @@ module.exports = function (Posts) {
 
         result = await plugins.hooks.fire('filter:post.get', { post: postData, uid: data.uid });
         result.post.isMain = isMain;
+        result.post.isAnon = isAnon;
         plugins.hooks.fire('action:post.save', { post: _.clone(result.post) });
         return result.post;
     };

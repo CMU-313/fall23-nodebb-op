@@ -1,15 +1,28 @@
 <div class="clearfix post-header">
+    <!-- IF posts.isAnon -->
+    <div class="icon pull-left">
+        {buildAvatar(null, "sm2x", true, "", "user/picture")}
+    </div>
+    <!-- ELSE -->
     <div class="icon pull-left">
         <a href="<!-- IF posts.user.userslug -->{config.relative_path}/user/{posts.user.userslug}<!-- ELSE -->#<!-- ENDIF posts.user.userslug -->">
             {buildAvatar(posts.user, "sm2x", true, "", "user/picture")}
             <i component="user/status" class="fa fa-circle status {posts.user.status}" title="[[global:{posts.user.status}]]"></i>
         </a>
     </div>
+    <!-- ENDIF posts.isAnon -->
 
     <small class="pull-left">
+        <!-- IF posts.isAnon -->
+        <strong>
+            Anonymous User
+        </strong>
+        <!-- ELSE -->
         <strong>
             <a href="<!-- IF posts.user.userslug -->{config.relative_path}/user/{posts.user.userslug}<!-- ELSE -->#<!-- ENDIF posts.user.userslug -->" itemprop="author" data-username="{posts.user.username}" data-uid="{posts.user.uid}">{posts.user.displayname}</a>
         </strong>
+        <!-- ENDIF -->
+
 
         <!-- IMPORT partials/topic/badge.tpl -->
 
@@ -54,8 +67,10 @@
 </div>
 
 <div class="post-footer">
-    {{{ if posts.user.signature }}}
-    <div component="post/signature" data-uid="{posts.user.uid}" class="post-signature">{posts.user.signature}</div>
+    {{{ if !posts.isAnon }}}
+        {{{ if posts.user.signature }}}
+        <div component="post/signature" data-uid="{posts.user.uid}" class="post-signature">{posts.user.signature}</div>
+        {{{ end }}}
     {{{ end }}}
 
     <div class="clearfix">
@@ -63,7 +78,7 @@
     <a component="post/reply-count" data-target-component="post/replies/container" href="#" class="threaded-replies no-select pull-left {{{ if !posts.replies.count }}}hidden{{{ end }}}">
         <span component="post/reply-count/avatars" class="avatars {{{ if posts.replies.hasMore }}}hasMore{{{ end }}}">
             {{{each posts.replies.users}}}
-            {buildAvatar(posts.replies.users, "xs", true, "")}
+                {buildAvatar(posts.replies.users, "xs", true, "")}
             {{{end}}}
         </span>
 
