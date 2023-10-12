@@ -18,4 +18,5 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
+      - run: cp install/package.json package.json
       - run: npm test test/unit_test.js
