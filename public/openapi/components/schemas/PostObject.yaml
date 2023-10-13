@@ -7,6 +7,8 @@ PostObject:
     tid:
       type: number
       description: A topic identifier
+    isAnon:
+      type: boolean // # If the post is anonymous
     content:
       type: string
     uid:
@@ -140,9 +142,3 @@ PostObject:
       type: boolean
     replies:
       type: number
-    anonCount:
-      type: number
-    isAnon: 
-      type: boolean; // # If the post is anonymous
-    anonname:
-      type : string

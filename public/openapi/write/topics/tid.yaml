@@ -50,6 +50,8 @@ post:
               type: number
             toPid:
               type: number
+            isAnon:
+              type: boolean
           required:
             - content
   responses:
