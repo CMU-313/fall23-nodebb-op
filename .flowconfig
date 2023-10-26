@@ -1,0 +1,18 @@
+[ignore]
+.*/node_modules/.*
+.*/build/.*
+
+[include]
+./src/  # Include your source code directory
+
+[libs]
+# Include specific Flow library definitions here
+
+[lints]
+# Configure custom lint rules or enable/disable built-in rules here
+
+[options]
+
+[strict]
+
+
