@@ -13,7 +13,7 @@ jobs:
       - name: Install Node.js
         uses: actions/setup-node@v2
         with:
-          node-version: 14  # Change the Node.js version as needed
+          node-version: 16  
 
       - name: Install retire
         run: npm install -g retire
