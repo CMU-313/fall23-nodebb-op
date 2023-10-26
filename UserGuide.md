@@ -1,3 +1,4 @@
+=======
 # How to User Test the Anonymous Post Feature
 1. Clone the `fall23-nodebb-op` Github repository.
 2. Run the appropriate setup guide from https://cmu-313.github.io/projects/P1/1_checkpoint/#repository-setup
@@ -17,3 +18,4 @@ The automated tests for this feature are found in `test/unit_test.js`. These tes
 * Post reply storing correctly if the reply is anonymous or not.
 
 We had trouble actually running the tests, so these tests are just the general structure that we wanted but they do not run. We also could not figure out how to test UI changes besides with manual checking.
+
