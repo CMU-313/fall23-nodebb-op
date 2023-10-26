@@ -1,18 +1,21 @@
+=======
 # How to User Test the Anonymous Post Feature
 1. Clone the `fall23-nodebb-op` Github repository.
 2. Run the appropriate setup guide from https://cmu-313.github.io/projects/P1/1_checkpoint/#repository-setup
-3. Create a new NodeBB account.
-4. Click on a category (e.g. General Discussion)
-5. Click on the "New Topic" button to write a new topic. (This also works for post replies.)
-6. Either check the box for "Post as Anonymous" before submitting your post.
-7. If you checked the box, see that your username displays as "Anonymous" rather than your name.
-8. If you edit the post and uncheck the box, see that your username is now shown.
+3. Log into NodeBB using the admin account information you received upon setup.
+4. As an admin, click on the gears icon labeled 'Admin' at the top of the page.
+5. Click on 'Extend' in the navigation bar. Click on 'Plugins' in the dropdown that appears.
+6. Either in 'Installed' or 'Find Plugins' look for nodebb-plugin-composer-op and make sure it is installed and activated.
+7. Return to localhost:4567 or the forum view.
+8. Click on a category (e.g. General Discussion)
+9. Click on the "New Topic" button to write a new topic. (This also works for post replies.)
+10. You can check the box for "Post as Anonymous" before submitting your post or leave it unchecked.
+11. If you checked the box, see that your username displays as "Anonymous" rather than your name.
 
 # Where to Find the Automated Tests
 The automated tests for this feature are found in `test/unit_test.js`. These tests check the behavior of
-* The displayed name is unaffected for a post where the box is unchecked
-* The displayed name is "Anonymous" when the isAnon feature is checked
-* The displayed name returns to the normal display name when the feature is unchecked again.
-* This feature works for posts as well as topics.
+* Topic posts storing correctly if the post is anonymous or not.
+* Post reply storing correctly if the reply is anonymous or not.
 
-which was all of the criteria we were looking for, in addition to the fact that the changes were actually reflected in the UI.
+We had trouble actually running the tests, so these tests are just the general structure that we wanted but they do not run. We also could not figure out how to test UI changes besides with manual checking.
+
