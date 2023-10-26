@@ -140,7 +140,3 @@ PostObject:
       type: boolean
     replies:
       type: number
-    isAnon: 
-      type: boolean; // # If the post is anonymous
-    anonname:
-      type : string

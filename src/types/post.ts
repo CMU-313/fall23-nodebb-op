@@ -19,5 +19,4 @@ export type PostObject = {
   isMainPost: boolean;
   replies: number;
 
-  isAnon: boolean; // # If the post is anonymous
 };
