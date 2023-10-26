@@ -1,0 +1,22 @@
+name: Retire.js Check
+
+on: [push, pull_request] 
+
+jobs:
+  retire-check:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Install Node.js
+        uses: actions/setup-node@v2
+        with:
+          node-version: 14  # Change the Node.js version as needed
+
+      - name: Install retire
+        run: npm install -g retire
+
+      - name: Run retire
+        run: retire
