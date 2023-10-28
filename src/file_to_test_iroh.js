@@ -1,5 +1,5 @@
 'use strict';
 
-let foo = 42
+const foo = 42;
 
-module.exports = foo
+module.exports = foo;
