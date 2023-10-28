@@ -1,12 +1,13 @@
 'use strict';
 
 const Iroh = require('iroh');
+const testFile = require('../src/file_to_test_iroh');
 
-let code = `let foo = 42`;
+let code = `testFile`;
 
 let stage = new Iroh.Stage(code);
-stage.addListener(Iroh.VAR).on("after", function(e) {
-  console.log(e.name, "=>", e.value);
+stage.addListener(Iroh.PROGRAM).on("leave", function(e) {
+  console.log('File returns: ' + e.return);
 });
 
 eval(stage.script);
