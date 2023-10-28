@@ -1,0 +1,21 @@
+name: Iroh Dynamic Analysis
+
+on: [push, pull_request]
+
+jobs:
+  run-iroh:
+    name: Run Iroh
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+
+      - run: cp install/package.json package.json
+
+      - name: Install Node
+        uses: actions/setup-node@v3
+
+      - name: NPM Install
+        uses: bahmutov/npm-install@v1
+
+      - name: Running Iroh script
+        run: node src/test_iroh.js
