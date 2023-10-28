@@ -15,7 +15,7 @@ jobs:
         uses: actions/setup-node@v3
 
       - name: NPM Install
-        uses: bahmutov/npm-install@v1
+        uses: npm install
 
       - name: Running Iroh script
         run: node src/test_iroh.js
