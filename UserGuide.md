@@ -18,4 +18,13 @@ The automated tests for this feature are found in `test/unit_test.js`. These tes
 * Post reply storing correctly if the reply is anonymous or not.
 
 We had trouble actually running the tests, so these tests are just the general structure that we wanted but they do not run. We also could not figure out how to test UI changes besides with manual checking.
+=======
+# How to Use Jalangi to Evaluate JavaScript Code
 
+1. Ensure that you have properly run `./nodebb setup`.
+
+2. In the root directory of the project, invoke: `npm run jalangi <file-path>`
+
+Note: Currently Jalangi raises a syntax error on the js files in the project directory
+as one of its parsing modules, acorn, does not support dynamic imports using require()
+under ecmaVersion 6 as called by Jalangi. A detailed description about a similar problem can be found at: https://github.com/acornjs/acorn/issues/970.
