@@ -13,9 +13,13 @@ jobs:
 
       - name: Install Node
         uses: actions/setup-node@v3
+        with:
+          node-version: ${{ matrix.node }}
 
       - name: NPM Install
-        uses: npm install
+        uses: bahmutov/npm-install@v1
+        with:
+          useLockFile: false
 
       - name: Running Iroh script
         run: node src/test_iroh.js
