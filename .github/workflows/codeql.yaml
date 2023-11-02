@@ -14,11 +14,21 @@ name: "CodeQL"
 on:
   push:
     branches: [ "main" ]
+    paths-ignore:
+      - "public/vendor/*"
+      - "test/*"
   pull_request:
     # The branches below must be a subset of the branches above
     branches: [ "main" ]
+    paths-ignore:
+      - "public/vendor/*"
+      - "test/*"
+
+  # https://crontab.guru
+  # [minute] [hour] [day] [month] [day-of-the-week]
+  # Every Thursday at 4PM
   schedule:
-    - cron: '36 1 * * 5'
+    - cron: '0 16 * * 4'
 
 jobs:
   analyze:
@@ -34,6 +44,7 @@ jobs:
       actions: read
       contents: read
       security-events: write
+
 
     strategy:
       fail-fast: false
