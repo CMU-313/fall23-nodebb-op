@@ -3,7 +3,6 @@
 .*/build/.*
 
 [include]
-./src/  # Include your source code directory
 
 [libs]
 # Include specific Flow library definitions here
@@ -12,6 +11,8 @@
 # Configure custom lint rules or enable/disable built-in rules here
 
 [options]
+; all=true
+exact_by_default=false
 
 [strict]
 
